@@ -1,9 +1,8 @@
 package ui;
 
 import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.io.InputStreamReader;
 
 import data.RecipeFileHandler;
 
@@ -37,6 +36,12 @@ public class RecipeUI {
                 switch (choice) {
                     case "1":
                         // 設問1: 一覧表示機能
+                        System.out.println("Recipes:");
+                        // for (int i = 0; int < .length; i++) {
+                            System.out.println("-----------------------------------");
+                            this.displayRecipes();
+                            System.out.println("-----------------------------------");
+                        // }
                         break;
                     case "2":
                         // 設問2: 新規登録機能
@@ -86,4 +91,3 @@ public class RecipeUI {
     }
 
 }
-
