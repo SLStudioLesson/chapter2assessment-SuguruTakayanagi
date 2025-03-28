@@ -1,7 +1,9 @@
 package data;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -24,14 +26,14 @@ public class RecipeFileHandler {
      * @return レシピデータ
      */
     public ArrayList<String> readRecipes() {
-        // recipe.txtを読み込み、内容を1行ごとにlineに格納して、配列に保存する。
+        // recipe.txtを読み込み、内容を1行ごとにlineに保存して、リストに格納する。
         // このメソッドではリスト形式で返すようになっているので、最後にmenusリストを返す。
         ArrayList<String> menus = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String line;
             //内容を1行ごとにlineに格納する
             while ((line = reader.readLine()) != null) {
-                //lineに格納した1行について(",")で区切って配列に格納する
+                //lineに保存した1行について(",")で区切ってリストに格納する
                 menus.add(line);
             }
         } catch (IOException e) {
@@ -51,10 +53,12 @@ public class RecipeFileHandler {
      */
      //
     public void addRecipe(String recipeName, String ingredients) {
-        // try {
-
-        // } catch (IOException e) {
-
-        // }
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
+            String content = recipeName + "," + ingredients;
+            writer.newLine();
+            writer.write(content);
+        } catch (IOException e) {
+            System.out.println("Error reading file: " + e.getMessage());
+        }
     }
 }

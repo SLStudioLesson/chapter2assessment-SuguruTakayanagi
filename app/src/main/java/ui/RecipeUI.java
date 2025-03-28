@@ -67,24 +67,31 @@ public class RecipeUI {
      */
     private void displayRecipes() {
         //readRecipes()メソッドを実行して、返されたリストをここで新規に作成したリストに格納する。
-        //そのリストの1番最初の要素がレシピのタイトル、2番目以降が材料として出力する。
+        //そのリストの1番最初の要素がレシピのタイトル、2番目以降の要素が材料として出力する。
         //あとは、READMEの出力例に従って、表示形式を整える。
 
             System.out.println("Recipes:");
             System.out.println("-----------------------------------");
             ArrayList<String> recipeData = new ArrayList<>();
             recipeData = handle.readRecipes();
-            for (String recipe : recipeData) {
-                String[] list = recipe.split(",");
-                if (list != null) {
-                    System.out.println("Recipe Name: " + list[0]);
-                    for (int i = 1; i < list.length; i++) {
-                        System.out.println("Main Ingredients: " + list[i]);
+            if (recipeData != null && !(recipeData.isEmpty())) {
+                for (String recipe : recipeData) {
+                    String[] list = recipe.split(",");
+                    if (list != null) {
+                        System.out.println("Recipe Name: " + list[0]);
+                        System.out.print("Main Ingredients: ");
+                        for (int i = 1; i < list.length -1; i++) {
+                            System.out.print(list[i] + ",");
+                        }
+                        //材料の末尾には(",")が不要なので、下記で出力する。
+                        System.out.print(list[list.length -1]);
+                        System.out.println();
+                        System.out.println("-----------------------------------");
                     }
-                    System.out.println("-----------------------------------");
-                } else {
-                    System.out.println();
                 }
+                //下記else{}、レシピのテキストファイルが空の場合に出力する。
+            } else {
+                System.out.println("No recipes available.");
             }
     }
     /**
@@ -94,7 +101,15 @@ public class RecipeUI {
      * @throws java.io.IOException 入出力が受け付けられない
      */
     private void addNewRecipe() throws IOException {
+        System.out.print("Enter recipe name: ");
+        String recipeName = reader.readLine();
 
+        System.out.println("Enter main ingredients (comma separated): ");
+        String ingredients = reader.readLine();
+
+        handle.addRecipe(recipeName, ingredients);
+
+        System.out.println("Recipe added successfully.");
     }
 
     /**
