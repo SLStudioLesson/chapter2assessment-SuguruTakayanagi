@@ -70,11 +70,11 @@ public class RecipeUI {
         //そのリストの1番最初の要素がレシピのタイトル、2番目以降の要素が材料として出力する。
         //あとは、READMEの出力例に従って、表示形式を整える。
 
-            System.out.println("Recipes:");
-            System.out.println("-----------------------------------");
-            ArrayList<String> recipeData = new ArrayList<>();
-            recipeData = handle.readRecipes();
-            if (recipeData != null && !(recipeData.isEmpty())) {
+        ArrayList<String> recipeData = new ArrayList<>();
+        recipeData = handle.readRecipes();
+        if (recipeData != null && !(recipeData.isEmpty())) {
+                System.out.println("Recipes:");
+                System.out.println("-----------------------------------");
                 for (String recipe : recipeData) {
                     String[] list = recipe.split(",");
                     if (list != null) {
